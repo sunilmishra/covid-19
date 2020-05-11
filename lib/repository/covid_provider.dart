@@ -18,7 +18,7 @@ class CovidApiClient {
 
     print('Response code: ${response.statusCode}');
     if (response.statusCode != 200) {
-      throw Exception('error getting weather for location');
+      throw Exception('error getting covid api response.');
     }
 
     final covidJson = jsonDecode(response.body);
