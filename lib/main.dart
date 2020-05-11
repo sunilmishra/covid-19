@@ -29,6 +29,7 @@ class CovidApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Covid-19',
       home: BlocProvider(
         create: (context) => CovidBloc(

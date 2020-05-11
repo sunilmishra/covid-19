@@ -14,54 +14,59 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: Text('Covid-19'),
       ),
-      body: BlocBuilder<CovidBloc, CovidState>(
-        builder: (context, state) {
-          state.when(
-            loading: () {
-              nextView = Center(child: CircularProgressIndicator());
-            },
-            content: (summary) {
-              List<Country> countries = summary.countries;
-              countries
-                  .sort((a, b) => b.totalConfirmed.compareTo(a.totalConfirmed));
-              nextView = ListView(
-                shrinkWrap: true,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text('Data Source'),
-                      FlatButton(
-                        child: Text(
-                          'Johns Hopkins CSSE',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        onPressed: () async => launchURL(
-                            'https://systems.jhu.edu/research/public-health/ncov/'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16.0),
-                  _GlobalDataView(
-                    global: summary.global,
-                    date: DateFormat('MMM dd, hh:mm a')
-                        .format(DateTime.parse(summary.date)),
-                  ),
-                  const SizedBox(height: 16.0),
-                  _CountriesDataView(countries: countries),
-                ],
-              );
-            },
-            error: () {
-              nextView = Center(
-                  child: Text('Something went wrong, please try again!'));
-            },
-          );
-          return nextView;
+      body: RefreshIndicator(
+        onRefresh: () async {
+          BlocProvider.of<CovidBloc>(context).add(CovidSummaryEvent());
         },
+        child: BlocBuilder<CovidBloc, CovidState>(
+          builder: (context, state) {
+            state.when(
+              loading: () {
+                nextView = Center(child: CircularProgressIndicator());
+              },
+              content: (summary) {
+                List<Country> countries = summary.countries;
+                countries.sort(
+                    (a, b) => b.totalConfirmed.compareTo(a.totalConfirmed));
+                nextView = ListView(
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text('Data Source'),
+                        FlatButton(
+                          child: Text(
+                            'Johns Hopkins CSSE',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          onPressed: () async => launchURL(
+                              'https://systems.jhu.edu/research/public-health/ncov/'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    _GlobalDataView(
+                      global: summary.global,
+                      date: DateFormat('MMM dd, hh:mm a')
+                          .format(DateTime.parse(summary.date)),
+                    ),
+                    const SizedBox(height: 16.0),
+                    _CountriesDataView(countries: countries),
+                  ],
+                );
+              },
+              error: () {
+                nextView = Center(
+                    child: Text('Something went wrong, please try again!'));
+              },
+            );
+            return nextView;
+          },
+        ),
       ),
     );
   }
@@ -154,6 +159,7 @@ class _CountriesDataView extends StatelessWidget {
       itemBuilder: (context, index) {
         final country = countries[index];
         return Card(
+          margin: const EdgeInsets.all(8.0),
           child: ListTile(
             contentPadding: const EdgeInsets.all(16.0),
             title: Center(
