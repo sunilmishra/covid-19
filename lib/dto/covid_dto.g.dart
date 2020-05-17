@@ -6,43 +6,42 @@ part of 'covid_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CovidSummary _$CovidSummaryFromJson(Map json) {
-  return CovidSummary(
+// ignore: non_constant_identifier_names
+_$_CovidSummary _$_$_CovidSummaryFromJson(Map<String, dynamic> json) {
+  return _$_CovidSummary(
     global: json['Global'] == null
         ? null
-        : Global.fromJson((json['Global'] as Map)?.map(
-            (k, e) => MapEntry(k as String, e),
-          )),
+        : Global.fromJson(json['Global'] as Map<String, dynamic>),
     countries: (json['Countries'] as List)
-        ?.map((e) => e == null
-            ? null
-            : Country.fromJson((e as Map)?.map(
-                (k, e) => MapEntry(k as String, e),
-              )))
+        ?.map((e) =>
+            e == null ? null : Country.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     date: json['Date'] as String,
   );
 }
 
-Map<String, dynamic> _$CovidSummaryToJson(CovidSummary instance) =>
+// ignore: non_constant_identifier_names
+Map<String, dynamic> _$_$_CovidSummaryToJson(_$_CovidSummary instance) =>
     <String, dynamic>{
       'Global': instance.global,
       'Countries': instance.countries,
       'Date': instance.date,
     };
 
-Global _$GlobalFromJson(Map json) {
-  return Global(
-    json['NewConfirmed'] as int,
-    json['TotalConfirmed'] as int,
-    json['NewDeaths'] as int,
-    json['TotalDeaths'] as int,
-    json['NewRecovered'] as int,
-    json['TotalRecovered'] as int,
+// ignore: non_constant_identifier_names
+_$_Global _$_$_GlobalFromJson(Map<String, dynamic> json) {
+  return _$_Global(
+    newConfirmed: json['NewConfirmed'] as int,
+    totalConfirmed: json['TotalConfirmed'] as int,
+    newDeaths: json['NewDeaths'] as int,
+    totalDeaths: json['TotalDeaths'] as int,
+    newRecovered: json['NewRecovered'] as int,
+    totalRecovered: json['TotalRecovered'] as int,
   );
 }
 
-Map<String, dynamic> _$GlobalToJson(Global instance) => <String, dynamic>{
+// ignore: non_constant_identifier_names
+Map<String, dynamic> _$_$_GlobalToJson(_$_Global instance) => <String, dynamic>{
       'NewConfirmed': instance.newConfirmed,
       'TotalConfirmed': instance.totalConfirmed,
       'NewDeaths': instance.newDeaths,
@@ -50,9 +49,9 @@ Map<String, dynamic> _$GlobalToJson(Global instance) => <String, dynamic>{
       'NewRecovered': instance.newRecovered,
       'TotalRecovered': instance.totalRecovered,
     };
-
-Country _$CountryFromJson(Map json) {
-  return Country(
+// ignore: non_constant_identifier_names
+_$_Country _$_$_CountryFromJson(Map<String, dynamic> json) {
+  return _$_Country(
     country: json['Country'] as String,
     countryCode: json['CountryCode'] as String,
     slug: json['Slug'] as String,
@@ -66,7 +65,9 @@ Country _$CountryFromJson(Map json) {
   );
 }
 
-Map<String, dynamic> _$CountryToJson(Country instance) => <String, dynamic>{
+// ignore: non_constant_identifier_names
+Map<String, dynamic> _$_$_CountryToJson(_$_Country instance) =>
+    <String, dynamic>{
       'Country': instance.country,
       'CountryCode': instance.countryCode,
       'Slug': instance.slug,

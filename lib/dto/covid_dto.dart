@@ -1,110 +1,48 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+part 'covid_dto.freezed.dart';
 part 'covid_dto.g.dart';
 
-@JsonSerializable(anyMap: true)
-class CovidSummary {
-  const CovidSummary({
-    this.global,
-    this.countries,
-    this.date,
-  });
-
-  @JsonKey(name: 'Global')
-  final Global global;
-
-  @JsonKey(name: 'Countries')
-  final List<Country> countries;
-
-  @JsonKey(name: 'Date')
-  final String date;
+@freezed
+abstract class CovidSummary with _$CovidSummary {
+  factory CovidSummary({
+    @JsonKey(name: 'Global') Global global,
+    @JsonKey(name: 'Countries') List<Country> countries,
+    @JsonKey(name: 'Date') String date,
+  }) = _CovidSummary;
 
   factory CovidSummary.fromJson(Map<String, dynamic> json) =>
       _$CovidSummaryFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CovidSummaryToJson(this);
 }
 
-@JsonSerializable(anyMap: true)
-class Global {
-  const Global(
-    this.newConfirmed,
-    this.totalConfirmed,
-    this.newDeaths,
-    this.totalDeaths,
-    this.newRecovered,
-    this.totalRecovered,
-  );
-
-  @JsonKey(name: 'NewConfirmed')
-  final int newConfirmed;
-
-  @JsonKey(name: 'TotalConfirmed')
-  final int totalConfirmed;
-
-  @JsonKey(name: 'NewDeaths')
-  final int newDeaths;
-
-  @JsonKey(name: 'TotalDeaths')
-  final int totalDeaths;
-
-  @JsonKey(name: 'NewRecovered')
-  final int newRecovered;
-
-  @JsonKey(name: 'TotalRecovered')
-  final int totalRecovered;
+@freezed
+abstract class Global with _$Global {
+  factory Global({
+    @JsonKey(name: 'NewConfirmed') int newConfirmed,
+    @JsonKey(name: 'TotalConfirmed') int totalConfirmed,
+    @JsonKey(name: 'NewDeaths') int newDeaths,
+    @JsonKey(name: 'TotalDeaths') int totalDeaths,
+    @JsonKey(name: 'NewRecovered') int newRecovered,
+    @JsonKey(name: 'TotalRecovered') int totalRecovered,
+  }) = _Global;
 
   factory Global.fromJson(Map<String, dynamic> json) => _$GlobalFromJson(json);
-
-  Map<String, dynamic> toJson() => _$GlobalToJson(this);
 }
 
-@JsonSerializable(anyMap: true)
-class Country {
-  const Country({
-    this.country,
-    this.countryCode,
-    this.slug,
-    this.newConfirmed,
-    this.totalConfirmed,
-    this.newDeaths,
-    this.totalDeaths,
-    this.newRecovered,
-    this.totalRecovered,
-    this.date,
-  });
-
-  @JsonKey(name: 'Country')
-  final String country;
-
-  @JsonKey(name: 'CountryCode')
-  final String countryCode;
-
-  @JsonKey(name: 'Slug')
-  final String slug;
-
-  @JsonKey(name: 'NewConfirmed')
-  final int newConfirmed;
-
-  @JsonKey(name: 'TotalConfirmed')
-  final int totalConfirmed;
-
-  @JsonKey(name: 'NewDeaths')
-  final int newDeaths;
-
-  @JsonKey(name: 'TotalDeaths')
-  final int totalDeaths;
-
-  @JsonKey(name: 'NewRecovered')
-  final int newRecovered;
-
-  @JsonKey(name: 'TotalRecovered')
-  final int totalRecovered;
-
-  @JsonKey(name: 'Date')
-  final String date;
+@freezed
+abstract class Country with _$Country {
+  factory Country({
+    @JsonKey(name: 'Country') String country,
+    @JsonKey(name: 'CountryCode') String countryCode,
+    @JsonKey(name: 'Slug') String slug,
+    @JsonKey(name: 'NewConfirmed') int newConfirmed,
+    @JsonKey(name: 'TotalConfirmed') int totalConfirmed,
+    @JsonKey(name: 'NewDeaths') int newDeaths,
+    @JsonKey(name: 'TotalDeaths') int totalDeaths,
+    @JsonKey(name: 'NewRecovered') int newRecovered,
+    @JsonKey(name: 'TotalRecovered') int totalRecovered,
+    @JsonKey(name: 'Date') String date,
+  }) = _Country;
 
   factory Country.fromJson(Map<String, dynamic> json) =>
       _$CountryFromJson(json);
-
-  Map<String, dynamic> toJson() => _$CountryToJson(this);
 }

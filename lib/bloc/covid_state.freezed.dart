@@ -172,6 +172,8 @@ abstract class _$CovidSummaryContentCopyWith<$Res> {
           $Res Function(_CovidSummaryContent) then) =
       __$CovidSummaryContentCopyWithImpl<$Res>;
   $Res call({CovidSummary summary});
+
+  $CovidSummaryCopyWith<$Res> get summary;
 }
 
 class __$CovidSummaryContentCopyWithImpl<$Res>
@@ -191,6 +193,16 @@ class __$CovidSummaryContentCopyWithImpl<$Res>
     return _then(_CovidSummaryContent(
       summary == freezed ? _value.summary : summary as CovidSummary,
     ));
+  }
+
+  @override
+  $CovidSummaryCopyWith<$Res> get summary {
+    if (_value.summary == null) {
+      return null;
+    }
+    return $CovidSummaryCopyWith<$Res>(_value.summary, (value) {
+      return _then(_value.copyWith(summary: value));
+    });
   }
 }
 

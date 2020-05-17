@@ -7,6 +7,9 @@ part of 'covid_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// ignore: unused_element
+T _$identity<T>(T value) => value;
+
 class _$CovidEventTearOff {
   const _$CovidEventTearOff();
 
